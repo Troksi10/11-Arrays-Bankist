@@ -122,8 +122,6 @@ Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages (
 
 TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
-
-GOOD LUCK 😀
 */
 
 // const calcAverageHumanAge = function (ages) {
@@ -148,8 +146,6 @@ Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this
 
 TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
-
-GOOD LUCK 😀
 */
 
 // const calcAverageHumanAge = ages =>
@@ -326,6 +322,13 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -478,8 +481,6 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // FOREACH
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
 // for(const movement of movements){
 //   for(const [i,movement] of movements.entries()){
 // if(movement > 0){
@@ -591,5 +592,115 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   .flat()
 //   .reduce((acc, mov) => acc + mov, 0);
 
+// Sorting Arrays
 
+// const owners = ['Ilija','Angela','Zlatko','Stefan'];
+// console.log(owners.sort());
+// console.log(owners);
 
+// // Numbers
+
+// console.log(movements);
+
+// // return < 0 A,B (keep order)
+// // return > 0 B,A (switch order)
+
+// // Asceding
+// // movements.sort((a,b) => {
+// //   if(a > b) return 1;
+// //   if(a < b) return -1;
+// // });
+
+// movements.sort((a,b) => a-b);
+
+// console.log(movements);
+
+// // Desceding
+// // movements.sort((a,b) => {
+// //   if(a > b) return -1;
+// //   if(a < b) return 1;
+// // });
+
+// movements.sort((a,b) => b-a);
+// console.log(movements);
+
+///////////////////////////////////////
+// More Ways of Creating and Filling Arrays
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// // Empty arrays + fill method
+// const x = new Array(7);
+// console.log(x);
+// console.log(x.map(() => 5));
+// x.fill(1, 3, 5);
+// x.fill(1);
+// console.log(x);
+
+// arr.fill(23, 2, 6);
+// console.log(arr);
+
+// // Array.from
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
+
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
+// console.log(z);
+
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent.replace('€', ''))
+//   );
+//   console.log(movementsUI);
+
+//   const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+// });
+
+///////////////////////////////////////
+// Array Methods Practice
+
+//1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+
+//2.
+
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(numDeposits1000);
+
+let a = 10;
+console.log(a++);
+console.log(a);
+
+//3.
+
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? sums.deposits += cur : sums.withdrawals += cur;
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
+
+//4.
+
+const convertTitleCase = function(title) {
+
+}
+console.log(convertTitleCase);
